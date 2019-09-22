@@ -6,12 +6,14 @@ function saveOptions(e) {
 }
 
 function setThreshold(threshold) {
-    if (Number.isInteger(threshold) === false) {
+    let thresholdNumber = Number(threshold)
+    if (Number.isInteger(thresholdNumber) === false) {
+        console.warn("invalid input: not a number", threshold)
         return;
     }
 
     browser.storage.sync.set({
-        threshold: threshold
+        threshold: thresholdNumber
     });
 }
 
@@ -22,7 +24,7 @@ function restoreOptions(){
             .value = result.threshold || "3600000";
     }
 
-    browser.storage.sync.get("options").then(setCurrentThreshold);
+    browser.storage.sync.get("threshold").then(setCurrentThreshold);
 }
   
   document.addEventListener("DOMContentLoaded", restoreOptions);
