@@ -4,6 +4,12 @@ const MAX_ZOOM = 3;
 const MIN_ZOOM = 0.3;
 const DEFAULT_ZOOM = 1;
 
+function removeOldTabs(tabs) {
+  for (let tab of tabs) {
+    browser.tabs.remove(tab.id)
+  }
+}
+
 function listTabs() {
   browser.storage.sync.get("threshold").then((options) => {
     getCurrentWindowTabs().then((tabs) => {
@@ -52,6 +58,20 @@ function listTabs() {
     }
 
     tabsList.appendChild(currentTabs);
+
+    let closeTabs = document.getElementById('close-tabs');
+    closeTabs.innerHTML = '';
+    if (orderedTabs.length > 0) {
+      let closeAction = document.createElement('a')
+      closeAction.textContent = "Close tabs";
+      closeAction.setAttribute('href', '#');
+      closeAction.addEventListener('click', () => removeOldTabs(orderedTabs));
+      closeTabs.appendChild(closeAction);
+    } else {
+      let noAction = document.createElement('span')
+      noAction.innerText = "no action"
+      closeTabs.appendChild(noAction);
+    }
   });
 });
 }
