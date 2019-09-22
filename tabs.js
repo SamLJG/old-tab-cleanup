@@ -12,11 +12,17 @@ function firstUnpinnedTab(tabs) {
   }
 }
 
-function restoreOptions(){
-    // browser.storage.sync.set({
-    //     threshold: "3600000"
-    // })
+function setThreshold(threshold) {
+    if (Number.isInteger(threshold) === false) {
+        return;
+    }
 
+    browser.storage.sync.set({
+        threshold: threshold
+    });
+}
+
+function restoreOptions(){
     function setCurrentThreshold(result){
         document
             .getElementById("tab-age-threshold")
