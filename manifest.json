@@ -1,0 +1,21 @@
+{
+
+    "manifest_version": 2,
+    "name": "Old Tab Cleanup",
+    "version": "1.0.1",
+  
+    "description": "Lists old tabs older than a certain threshold.",
+  
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "browser_action": {
+        "default_title": "tab stuff",
+        "default_popup": "tabs.html"
+    }
+  
+  }
