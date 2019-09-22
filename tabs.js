@@ -4,40 +4,6 @@ const MAX_ZOOM = 3;
 const MIN_ZOOM = 0.3;
 const DEFAULT_ZOOM = 1;
 
-function firstUnpinnedTab(tabs) {
-  for (var tab of tabs) {
-    if (!tab.pinned) {
-      return tab.index;
-    }
-  }
-}
-
-function setThreshold(threshold) {
-    if (Number.isInteger(threshold) === false) {
-        return;
-    }
-
-    browser.storage.sync.set({
-        threshold: threshold
-    });
-}
-
-function restoreOptions(){
-    function setCurrentThreshold(result){
-        document
-            .getElementById("tab-age-threshold")
-            .innerText = result.threshold || "Default (3600000)";
-    }
-
-    function failed(result){
-        document
-        .getElementById("tab-age-threshold")
-        .innerText = result.threshold || result;
-    }
-
-    browser.storage.sync.get("threshold").then(setCurrentThreshold, failed);
-}
-
 function listTabs() {
     restoreOptions()
   getCurrentWindowTabs().then((tabs) => {
@@ -105,13 +71,6 @@ document.addEventListener("click", (e) => {
       }
     });
 }
-
-
-//   else if (e.target.id === "tabs-remove") {
-//     callOnActiveTab((tab) => {
-//       browser.tabs.remove(tab.id);
-//     });
-//   }
 
   e.preventDefault();
 });
