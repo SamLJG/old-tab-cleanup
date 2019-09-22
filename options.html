@@ -7,10 +7,14 @@
 
   <body>
 
-    <form>
-        <label>Tab Age Threshold<input type="number" id="tab-age-threshold-option" min="0"></label>
+    <form id="custom-threshold">
+        <label>Tab Age Threshold (ms)<input type="number" id="tab-age-threshold-option" min="0"></label>
         <button type="submit">Save</button>
     </form>
+
+    <a href="#" id="one-month-threshold"><label>One Month</label></a>
+    <a href="#" id="one-week-threshold"><label>One Week</label></a>
+    <a href="#" id="one-day-threshold"><label>One Day</label></a>
 
     <script src="constants.js"></script>
     <script src="options.js"></script>

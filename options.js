@@ -26,6 +26,17 @@ function restoreOptions(){
 
     browser.storage.sync.get("threshold").then(setCurrentThreshold, setCurrentThreshold);
 }
+
+function quickThreshold(threshold) {
+    document.getElementById("tab-age-threshold-option").value = threshold;
+    setThreshold(threshold);
+}
   
-  document.addEventListener("DOMContentLoaded", restoreOptions);
-  document.querySelector("form").addEventListener("submit", saveOptions);
+document.addEventListener("DOMContentLoaded", restoreOptions);
+document.querySelector("#custom-threshold").addEventListener("submit", saveOptions);
+
+document.querySelector("#one-month-threshold").addEventListener("click", () => quickThreshold(ONE_MONTH_THRESHOLD));
+
+document.querySelector("#one-week-threshold").addEventListener("click", () => quickThreshold(ONE_WEEK_THRESHOLD));
+
+document.querySelector("#one-day-threshold").addEventListener("click", () => quickThreshold(ONE_DAY_THRESHOLD));
