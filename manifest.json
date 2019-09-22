@@ -9,6 +9,9 @@
     "icons": {
       "48": "icons/border-48.png"
     },
+    "options_ui":{
+        "page": "options.html"
+    },
     "permissions": [
         "tabs",
         "storage"
