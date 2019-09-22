@@ -14,7 +14,7 @@
         "storage"
     ],
     "browser_action": {
-        "default_title": "tab stuff",
+        "default_title": "Old Tab Cleanup",
         "default_popup": "tabs.html"
     }
   
