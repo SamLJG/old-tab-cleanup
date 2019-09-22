@@ -4,48 +4,50 @@ const MAX_ZOOM = 3;
 const MIN_ZOOM = 0.3;
 const DEFAULT_ZOOM = 1;
 
+const DEFAULT_AGE_THRESHOLD = 3600000;
+
 function listTabs() {
-    restoreOptions()
-  getCurrentWindowTabs().then((tabs) => {
-
-    let currentTime = (new Date).getTime();
+  browser.storage.sync.get("options").then((options) => {
+    getCurrentWindowTabs().then((tabs) => {
+      let threshold = options.threshold || DEFAULT_AGE_THRESHOLD
+      let currentTime = (new Date).getTime();
     
-    let ageThreshold = currentTime - 3600000
-    let oldTabs = tabs.filter(tab => 
-        {
-            return tab.lastAccessed < ageThreshold
-        })
+      let ageThreshold = currentTime - threshold
+      let oldTabs = tabs.filter(tab => {
+        return tab.lastAccessed < ageThreshold
+      })
 
-    let orderedTabs = oldTabs.sort(function(a, b) {
+      let orderedTabs = oldTabs.sort(function(a, b) {
         return a.lastAccessed > b.lastAccessed ? 1 : 0
-    })
-    let tabsList = document.getElementById('tabs-list');
-    let currentTabs = document.createDocumentFragment();
-    let limit = 50;
-    let counter = 0;
+      })
 
-    tabsList.textContent = '';
+      let tabsList = document.getElementById('tabs-list');
+      let currentTabs = document.createDocumentFragment();
+      let limit = 50;
+      let counter = 0;
 
-    for (let tab of orderedTabs) {
-      if (!tab.active && counter <= limit) {
-        let tabLink = document.createElement('a');
+      tabsList.textContent = '';
 
-        let age = currentTime - tab.lastAccessed
-        let ageDisplay = Math.round((age / 1000)).toString() + "s "
-        if (age > 60000){
+      for (let tab of orderedTabs) {
+        if (!tab.active && counter <= limit) {
+          let tabLink = document.createElement('a');
+
+          let age = currentTime - tab.lastAccessed
+          let ageDisplay = Math.round((age / 1000)).toString() + "s "
+          if (age > 60000){
             ageDisplay = Math.round((age / 1000 / 60)).toString() + "m "
-        }
-        if (age > 60000 * 60)
-        {
-            ageDisplay = Math.round((age / 1000 / 60 / 60)).toString() + "h "
-        }
-        if (age > 60000 * 60 * 24)
-        {
-            ageDisplay = Math.round((age / 1000 / 60 / 60 / 24)).toString() + " days "
-        }
-        tabLink.textContent = (tab.title || tab.id) + " " + ageDisplay;
-        tabLink.setAttribute('href', tab.id);
-        currentTabs.appendChild(tabLink);
+          }
+          if (age > 60000 * 60)
+          {
+              ageDisplay = Math.round((age / 1000 / 60 / 60)).toString() + "h "
+          }
+          if (age > 60000 * 60 * 24)
+          {
+              ageDisplay = Math.round((age / 1000 / 60 / 60 / 24)).toString() + " days "
+          }
+          tabLink.textContent = (tab.title || tab.id) + " " + ageDisplay;
+          tabLink.setAttribute('href', tab.id);
+          currentTabs.appendChild(tabLink);
       }
 
       counter += 1;
@@ -53,6 +55,7 @@ function listTabs() {
 
     tabsList.appendChild(currentTabs);
   });
+});
 }
 
 document.addEventListener("DOMContentLoaded", listTabs);
