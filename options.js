@@ -22,7 +22,7 @@ function restoreOptions(){
             .innerText = result.threshold || "3600000";
     }
 
-    browser.storage.sync.get("threshold").then(setCurrentThreshold);
+    browser.storage.sync.get("options").then(setCurrentThreshold);
 }
   
   document.addEventListener("DOMContentLoaded", restoreOptions);
