@@ -2,9 +2,9 @@
 
     "manifest_version": 2,
     "name": "Old Tab Cleanup",
-    "version": "1.0.2",
+    "version": "1.1.0",
   
-    "description": "Lists old tabs older than a certain threshold.",
+    "description": "Lists tabs older than a certain threshold and allows you to close them all with a click",
   
     "icons": {
       "48": "icons/border-48.png"
