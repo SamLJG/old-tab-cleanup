@@ -2,7 +2,7 @@
 
     "manifest_version": 2,
     "name": "Old Tab Cleanup",
-    "version": "1.0.1",
+    "version": "1.0.2",
   
     "description": "Lists old tabs older than a certain threshold.",
   
