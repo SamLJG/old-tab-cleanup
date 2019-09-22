@@ -21,10 +21,10 @@ function restoreOptions(){
     function setCurrentThreshold(result){
         document
             .getElementById("tab-age-threshold-option")
-            .value = result.threshold || "3600000";
+            .value = result.threshold || DEFAULT_AGE_THRESHOLD;
     }
 
-    browser.storage.sync.get("threshold").then(setCurrentThreshold);
+    browser.storage.sync.get("threshold").then(setCurrentThreshold, setCurrentThreshold);
 }
   
   document.addEventListener("DOMContentLoaded", restoreOptions);

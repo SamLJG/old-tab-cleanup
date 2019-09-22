@@ -4,10 +4,8 @@ const MAX_ZOOM = 3;
 const MIN_ZOOM = 0.3;
 const DEFAULT_ZOOM = 1;
 
-const DEFAULT_AGE_THRESHOLD = 3600000;
-
 function listTabs() {
-  browser.storage.sync.get("options").then((options) => {
+  browser.storage.sync.get("threshold").then((options) => {
     getCurrentWindowTabs().then((tabs) => {
       let threshold = options.threshold || DEFAULT_AGE_THRESHOLD
       let currentTime = (new Date).getTime();
